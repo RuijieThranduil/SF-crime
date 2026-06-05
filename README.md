@@ -2,6 +2,10 @@
 
 Static web showcase for a PySpark notebook analysis of San Francisco crime data.
 
+## Live Demo
+
+[Open the showcase page](https://ruijiethranduil.github.io/SF-crime/)
+
 Open `index.html` directly to view the standalone project page. The page is built from the extracted notebook payload in `data/project-data.js`, with source files kept separately for reuse:
 
 - `template.html`: standalone page template
