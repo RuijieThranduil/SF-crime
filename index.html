@@ -1,1701 +1,443 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SF Crime Project Showcase</title>
-    <style>
-:root {
-  --ink: #18202a;
-  --muted: #637082;
-  --line: #d9e0e7;
-  --paper: #fbfcfd;
-  --panel: #ffffff;
-  --accent: #0f766e;
-  --accent-strong: #0b5f59;
-  --gold: #b7791f;
-  --blue: #2563eb;
-  --rose: #be4b67;
-  --shadow: 0 18px 45px rgba(24, 32, 42, 0.08);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.5;
-}
-
-.hero {
-  min-height: 92vh;
-  padding: 24px clamp(18px, 5vw, 72px) 54px;
-  background:
-    linear-gradient(rgba(10, 22, 29, 0.2), rgba(10, 22, 29, 0.24)),
-    url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1800&q=80") center / cover;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.topbar,
-.footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: center;
-}
-
-.brand,
-.source-pill {
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0;
-}
-
-.source-pill {
-  max-width: min(560px, 55vw);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.hero-grid {
-  width: min(1180px, 100%);
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-  gap: clamp(28px, 5vw, 72px);
-  align-items: end;
-}
-
-.eyebrow {
-  margin: 0 0 10px;
-  color: var(--accent);
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0;
-}
-
-.hero .eyebrow {
-  color: #a7f3d0;
-}
-
-h1,
-h2,
-h3,
-p {
-  overflow-wrap: anywhere;
-}
-
-h1 {
-  max-width: 820px;
-  margin: 0;
-  font-size: clamp(3rem, 9vw, 6.8rem);
-  line-height: 0.95;
-  letter-spacing: 0;
-}
-
-h2 {
-  margin: 0;
-  font-size: clamp(1.55rem, 3vw, 2.45rem);
-  line-height: 1.08;
-  letter-spacing: 0;
-}
-
-h3 {
-  margin: 0 0 10px;
-  font-size: 1rem;
-}
-
-.subtitle {
-  max-width: 720px;
-  margin: 24px 0 0;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-}
-
-.tool-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-}
-
-.chip,
-.tab {
-  min-height: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  padding: 8px 13px;
-  background: rgba(255, 255, 255, 0.12);
-  color: inherit;
-  font-weight: 700;
-}
-
-.hero-panel {
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 8px;
-  padding: 22px;
-  background: rgba(7, 16, 22, 0.48);
-  backdrop-filter: blur(12px);
-}
-
-.snapshot {
-  display: grid;
-  gap: 16px;
-  margin: 0;
-}
-
-.snapshot dt {
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 0.76rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.snapshot dd {
-  margin: 4px 0 0;
-  color: #fff;
-  font-weight: 700;
-}
-
-.section {
-  padding: 72px clamp(18px, 5vw, 72px);
-}
-
-.section-heading {
-  max-width: 760px;
-  margin-bottom: 26px;
-}
-
-.story-cards,
-.timeline,
-.split-section {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.story-card,
-.timeline-item,
-.finding-panel,
-.details-box,
-.question-card {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--shadow);
-}
-
-.story-card,
-.timeline-item,
-.question-card {
-  padding: 20px;
-}
-
-.story-card p,
-.timeline-item p,
-.question-card p {
-  margin: 0;
-  color: var(--muted);
-}
-
-.timeline {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.timeline-step {
-  display: inline-grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  margin-bottom: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 800;
-}
-
-.findings-section {
-  background: #eef6f4;
-}
-
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.tab {
-  border-color: var(--line);
-  background: #fff;
-  color: var(--ink);
-  cursor: pointer;
-}
-
-.tab[aria-selected="true"] {
-  border-color: var(--accent-strong);
-  background: var(--accent-strong);
-  color: #fff;
-}
-
-.finding-panel {
-  padding: clamp(16px, 3vw, 28px);
-}
-
-.finding-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: start;
-  margin-bottom: 22px;
-}
-
-.finding-header p {
-  max-width: 720px;
-  margin: 8px 0 0;
-  color: var(--muted);
-}
-
-.chart-wrap {
-  min-height: 360px;
-  overflow-x: auto;
-}
-
-.chart-svg {
-  width: 100%;
-  min-width: 620px;
-  height: 360px;
-  display: block;
-}
-
-.axis-label {
-  fill: var(--muted);
-  font-size: 11px;
-}
-
-.bar {
-  fill: var(--accent);
-}
-
-.line-2015 {
-  stroke: var(--accent-strong);
-}
-
-.line-2016 {
-  stroke: var(--gold);
-}
-
-.line-2017 {
-  stroke: var(--blue);
-}
-
-.line-2018 {
-  stroke: var(--rose);
-}
-
-.chart-note,
-.empty-state {
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.data-table {
-  width: 100%;
-  margin-top: 22px;
-  border-collapse: collapse;
-  font-size: 0.92rem;
-}
-
-.data-table th,
-.data-table td {
-  border-bottom: 1px solid var(--line);
-  padding: 10px 8px;
-  text-align: left;
-}
-
-.data-table th {
-  color: var(--muted);
-  font-size: 0.76rem;
-  text-transform: uppercase;
-}
-
-.split-section {
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-}
-
-.skills-list,
-.limits {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.skills-list li,
-.limits li {
-  border-bottom: 1px solid var(--line);
-  padding: 13px 0;
-  font-weight: 700;
-}
-
-.question-list {
-  display: grid;
-  gap: 12px;
-}
-
-.question-card strong {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--accent-strong);
-}
-
-.details-box {
-  padding: 20px;
-}
-
-summary {
-  cursor: pointer;
-  font-weight: 800;
-}
-
-pre {
-  overflow-x: auto;
-  margin: 18px 0;
-  padding: 18px;
-  border-radius: 8px;
-  background: #111827;
-  color: #e5e7eb;
-  font-size: 0.86rem;
-}
-
-.footer {
-  padding: 28px clamp(18px, 5vw, 72px);
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.88rem;
-}
-
-@media (max-width: 860px) {
-  .hero {
-    min-height: auto;
-    gap: 72px;
-  }
-
-  .topbar,
-  .footer,
-  .finding-header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .source-pill {
-    max-width: 100%;
-  }
-
-  .hero-grid,
-  .story-cards,
-  .timeline,
-  .split-section {
-    grid-template-columns: 1fr;
-  }
-
-  h1 {
-    font-size: clamp(2.65rem, 16vw, 4.4rem);
-  }
-
-  .section {
-    padding-block: 54px;
-  }
-}
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A cinematic case study of San Francisco crime patterns analyzed with PySpark and Spark SQL."
+    />
+    <title>San Francisco Crime Analysis | Project Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="cinematic.css" />
   </head>
   <body>
-    <header class="hero">
-      <nav class="topbar" aria-label="Project metadata">
-        <span class="brand">Coding Project Showcase</span>
-        <span id="source-pill" class="source-pill"></span>
+    <a class="skip-link" href="#main">Skip to project story</a>
+
+    <header class="site-nav" id="site-nav">
+      <div class="nav-inner shell">
+        <a class="brand" href="#top" aria-label="SF Crime project home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>SF / CRIME</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a href="#overview">Overview</a>
+          <a href="#findings">Findings</a>
+          <a href="#build">Build</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#evidence">Evidence</a>
+        </nav>
+
+        <a
+          class="nav-source"
+          id="nav-github-link"
+          href="https://github.com/RuijieThranduil/SF-crime"
+          target="_blank"
+          rel="noreferrer"
+        >GitHub &nearr;</a>
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden>
+        <a href="#overview">Overview</a>
+        <a href="#findings">Findings</a>
+        <a href="#build">Build</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#evidence">Evidence</a>
+        <a
+          id="mobile-github-link"
+          href="https://github.com/RuijieThranduil/SF-crime"
+          target="_blank"
+          rel="noreferrer"
+        >GitHub &nearr;</a>
       </nav>
-      <section class="hero-grid">
-        <div>
-          <p class="eyebrow">PySpark Case Study</p>
-          <h1 id="project-title">San Francisco Crime Analysis</h1>
-          <p id="project-subtitle" class="subtitle"></p>
-          <div id="tool-list" class="tool-list" aria-label="Tools"></div>
-        </div>
-        <aside class="hero-panel" aria-label="Project snapshot">
-          <dl id="snapshot" class="snapshot"></dl>
-        </aside>
-      </section>
     </header>
 
-    <main>
-      <section class="section story-section" aria-labelledby="story-heading">
-        <div class="section-heading">
-          <p class="eyebrow">Purpose</p>
-          <h2 id="story-heading">What this project proves</h2>
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true">
+          <video
+            id="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source src="assets/sf-skyline.mp4" type="video/mp4" />
+          </video>
+          <div class="hero-wash"></div>
+          <div class="hero-grid"></div>
+          <div class="hero-scan"></div>
         </div>
-        <div id="story-cards" class="story-cards"></div>
-      </section>
 
-      <section class="section" aria-labelledby="workflow-heading">
-        <div class="section-heading">
-          <p class="eyebrow">Workflow</p>
-          <h2 id="workflow-heading">From notebook to evidence</h2>
-        </div>
-        <div id="workflow" class="timeline"></div>
-      </section>
+        <div class="hero-content shell" id="hero-content">
+          <p class="hero-kicker reveal-line">
+            <span>2.07M public SFPD records</span>
+            <span>2003-May 2018</span>
+          </p>
 
-      <section class="section findings-section" aria-labelledby="findings-heading">
-        <div class="section-heading">
-          <p class="eyebrow">Findings</p>
-          <h2 id="findings-heading">Key outputs extracted from the notebook</h2>
-        </div>
-        <div id="finding-tabs" class="tabs" role="tablist" aria-label="Finding views"></div>
-        <div id="finding-panel" class="finding-panel"></div>
-      </section>
+          <h1 id="hero-title" aria-label="San Francisco Crime Analysis">
+            <span class="hero-word"><span>San Francisco</span></span>
+            <span class="hero-word"><span>Crime Analysis</span></span>
+          </h1>
 
-      <section class="section split-section" aria-labelledby="skills-heading">
-        <div>
-          <div class="section-heading">
-            <p class="eyebrow">Signal</p>
-            <h2 id="skills-heading">Technical skills demonstrated</h2>
+          <div class="hero-lower reveal-line">
+            <p class="hero-deck">
+              Engineered an end-to-end Spark pipeline across
+              <strong>2,071,736 public incident records</strong>, turning raw city data
+              into decision-ready evidence.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#findings">
+                Explore findings <span aria-hidden="true">&darr;</span>
+              </a>
+              <a
+                class="button button-glass"
+                id="hero-github-link"
+                href="https://github.com/RuijieThranduil/SF-crime"
+                target="_blank"
+                rel="noreferrer"
+              >View code <span aria-hidden="true">&nearr;</span></a>
+            </div>
           </div>
-          <ul id="skills-list" class="skills-list"></ul>
         </div>
-        <div>
-          <div class="section-heading">
-            <p class="eyebrow">Evidence</p>
-            <h2>Notebook questions</h2>
+
+        <div class="hero-rail shell" aria-label="Project highlights">
+          <div class="rail-item reveal-line">
+            <span class="rail-value" data-count="2071736" data-format="compact">0</span>
+            <span class="rail-label">incident records</span>
           </div>
-          <div id="questions" class="question-list"></div>
+          <div class="rail-item reveal-line">
+            <span class="rail-value" data-count="10">0</span>
+            <span class="rail-label">police districts</span>
+          </div>
+          <div class="rail-item reveal-line">
+            <span class="rail-value">Spark SQL</span>
+            <span class="rail-label">analysis engine</span>
+          </div>
+          <p class="scroll-cue"><span></span>Scroll to read</p>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="details-heading">
-        <div class="section-heading">
-          <p class="eyebrow">Audit Trail</p>
-          <h2 id="details-heading">Raw extraction details</h2>
+      <section class="signal-band" id="overview">
+        <div class="shell signal-grid">
+          <div class="signal-intro section-reveal">
+            <p class="eyebrow eyebrow-light">The analytical brief</p>
+            <h2>Turn 2.07 million raw records into a decision-ready view of urban risk.</h2>
+          </div>
+
+          <div class="signal-copy section-reveal">
+            <p id="project-problem"></p>
+            <p class="muted-light">
+              The goal is descriptive, not predictive: reveal where and when
+              incidents concentrate, then communicate the limits honestly.
+            </p>
+          </div>
         </div>
-        <details class="details-box">
-          <summary>Schema sample and limitations</summary>
-          <pre id="schema"></pre>
-          <ul id="limits" class="limits"></ul>
-        </details>
+
+        <div class="shell capability-strip section-reveal" id="capability-strip"></div>
+      </section>
+
+      <section class="story-section section-pad">
+        <div class="shell story-layout">
+          <div class="story-heading section-reveal">
+            <p class="eyebrow">Project in one minute</p>
+            <h2>One notebook.<br />A city-scale analytical system.</h2>
+          </div>
+
+          <div class="story-copy section-reveal">
+            <p class="lede" id="project-approach"></p>
+            <p id="project-outcome"></p>
+          </div>
+
+          <div class="story-index section-reveal" aria-label="Analysis dimensions">
+            <span>01 Categories</span>
+            <span>02 Districts</span>
+            <span>03 Monthly trend</span>
+            <span>04 Hour of day</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="build-section section-pad" id="build">
+        <div class="shell">
+          <div class="build-heading section-reveal">
+            <div>
+              <p class="eyebrow">What I built</p>
+              <h2>Engineered the analytical pipeline end to end.</h2>
+            </div>
+            <div class="build-intro">
+              <p id="engineering-summary"></p>
+              <div class="why-spark">
+                <span>Why Spark</span>
+                <p id="why-spark"></p>
+              </div>
+            </div>
+          </div>
+
+          <dl class="scale-strip section-reveal" id="scale-strip" aria-label="Project scale"></dl>
+
+          <div class="build-proof-grid">
+            <ol class="build-list section-reveal" id="build-list"></ol>
+
+            <aside class="quality-panel section-reveal" aria-labelledby="quality-title">
+              <p class="eyebrow">Engineering quality</p>
+              <h3 id="quality-title">What was optimized and verified.</h3>
+              <div class="quality-list" id="quality-list"></div>
+              <div class="validation-block">
+                <p>Generation checks</p>
+                <ul id="validation-list"></ul>
+              </div>
+            </aside>
+          </div>
+
+          <div class="proof-band section-reveal">
+            <div>
+              <p class="eyebrow">Verify the work</p>
+              <h3>Code, notebook, and public source.</h3>
+            </div>
+            <nav class="proof-links" id="proof-links" aria-label="Project evidence links"></nav>
+          </div>
+        </div>
+      </section>
+
+      <section class="findings-section" id="findings">
+        <div class="shell findings-heading section-reveal">
+          <div>
+            <p class="eyebrow eyebrow-light">Key findings</p>
+            <h2>Patterns hidden in plain sight.</h2>
+          </div>
+          <p>
+            Switch dimensions to see the extracted notebook output become an
+            interactive, recruiter-readable evidence view.
+          </p>
+        </div>
+
+        <div class="finding-stage">
+          <div class="shell">
+            <div class="finding-tabs" id="finding-tabs" role="tablist" aria-label="Finding dimensions"></div>
+
+            <div class="finding-grid" id="finding-panel" aria-live="polite">
+              <div class="finding-narrative">
+                <p class="finding-number" id="finding-number">01</p>
+                <p class="eyebrow eyebrow-light" id="finding-label">Category distribution</p>
+                <h3 id="finding-title"></h3>
+                <p id="finding-summary"></p>
+                <dl class="finding-stat" id="finding-stat"></dl>
+              </div>
+
+              <div class="chart-frame">
+                <div class="chart-toolbar">
+                  <span id="chart-title">Extracted output</span>
+                  <span class="chart-key"><i></i> Incident count</span>
+                </div>
+                <div class="chart" id="chart" role="img"></div>
+                <p class="chart-note" id="chart-note"></p>
+              </div>
+            </div>
+
+            <details class="data-details" id="data-details">
+              <summary>
+                <span>Inspect extracted rows</span>
+                <span class="details-action">Open table +</span>
+              </summary>
+              <div class="table-scroll" id="finding-table"></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="insight-section section-pad">
+        <div class="shell">
+          <div class="insight-heading section-reveal">
+            <p class="eyebrow">Three decisive signals</p>
+            <h2>San Francisco's risk profile comes into focus.</h2>
+          </div>
+
+          <div class="insight-grid">
+            <article
+              class="insight insight-large section-reveal"
+              id="category-insight"
+              tabindex="0"
+              aria-label="Larceny and theft account for 23.1 percent of extracted incidents. Hover for detailed category evidence."
+            >
+              <p class="insight-index">01 / CATEGORY</p>
+              <span class="insight-hover-hint">Hover for detail</span>
+              <strong>23.1%</strong>
+              <h3>Larceny and theft lead the extracted category ranking.</h3>
+              <p>477,975 incidents, making it the single largest category in the notebook output.</p>
+              <div class="share-meter" aria-label="23.1 percent share"><span style="--share: 23.1%"></span></div>
+
+              <div class="insight-color-layer" aria-hidden="true">
+                <p class="insight-index">01 / CATEGORY DETAIL</p>
+                <div class="category-rank-preview">
+                  <p class="category-rank-label">Top five category volume</p>
+                  <div class="category-rank-bars" id="category-rank-bars"></div>
+                </div>
+                <div class="category-detail-copy">
+                  <p class="category-detail-kicker">Why this matters</p>
+                  <h3 id="category-detail-title"></h3>
+                  <p id="category-detail-copy"></p>
+                  <dl class="category-detail-stats" id="category-detail-stats"></dl>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="insight insight-red section-reveal"
+              id="district-insight"
+              tabindex="0"
+              aria-label="Southern has the highest district count. Hover for district ranking chart."
+            >
+              <p class="insight-index">02 / DISTRICT</p>
+              <span class="insight-chart-hint">Hover for chart</span>
+              <strong>378,453</strong>
+              <h3>Southern records the highest district count.</h3>
+              <p>Concentration matters: raw citywide totals can hide where operational pressure is greatest.</p>
+
+              <div class="insight-data-layer" aria-hidden="true">
+                <p class="insight-index">02 / DISTRICT DETAIL</p>
+                <div class="mini-chart-heading">
+                  <p>Top five police districts</p>
+                  <strong>Southern leads</strong>
+                </div>
+                <div class="district-mini-chart" id="district-mini-chart"></div>
+                <p class="mini-chart-note">Counts are drawn directly from the extracted notebook payload.</p>
+              </div>
+            </article>
+
+            <article
+              class="insight insight-dark section-reveal"
+              id="hour-insight"
+              tabindex="0"
+              aria-label="Incident volume peaks at 18:00. Hover for hourly distribution chart."
+            >
+              <p class="insight-index">03 / TIME</p>
+              <span class="insight-chart-hint">Hover for chart</span>
+              <strong>18:00</strong>
+              <h3>Early evening is the daily peak.</h3>
+              <p>The hourly distribution rises through the day and reaches 132,503 incidents at 6 PM.</p>
+
+              <div class="insight-data-layer" aria-hidden="true">
+                <p class="insight-index">03 / HOURLY DETAIL</p>
+                <div class="mini-chart-heading">
+                  <p>AM / PM incident clock</p>
+                  <strong>Peak at 18:00</strong>
+                </div>
+                <div class="hour-mini-chart" id="hour-mini-chart"></div>
+                <p class="mini-chart-note">Citywide distribution across all extracted records.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="workflow-section section-pad" id="workflow">
+        <div class="shell workflow-layout">
+          <div class="workflow-sticky section-reveal">
+            <p class="eyebrow">Engineering workflow</p>
+            <h2>From raw CSV to a story someone can act on.</h2>
+            <p>
+              The page is the final layer of a larger pipeline. Each step reduces
+              complexity while preserving a trace back to notebook evidence.
+            </p>
+          </div>
+
+          <ol class="workflow-list" id="workflow-list"></ol>
+        </div>
+      </section>
+
+      <section class="skills-band">
+        <div class="skills-track" id="skills-track" aria-label="Technical skills"></div>
+      </section>
+
+      <section class="evidence-section section-pad" id="evidence">
+        <div class="shell evidence-layout">
+          <div class="evidence-heading section-reveal">
+            <p class="eyebrow eyebrow-light">Notebook evidence</p>
+            <h2>Show the work.<br />Keep the claims grounded.</h2>
+            <p>
+              The narrative is edited for clarity. The metrics, schema and
+              analysis questions remain tied to the extracted notebook payload.
+            </p>
+          </div>
+
+          <div class="evidence-cascade section-reveal" id="evidence-cascade">
+            <article class="evidence-panel is-active" data-evidence-panel="questions">
+              <button class="evidence-trigger" type="button" aria-expanded="true">
+                <span class="evidence-panel-number">01</span>
+                <span class="evidence-panel-rail-title">Analysis questions</span>
+              </button>
+              <div class="evidence-panel-content">
+                <p class="evidence-panel-kicker">Notebook brief</p>
+                <h3>Analysis questions</h3>
+                <p class="evidence-panel-intro">Six questions shape the investigation from citywide counts to operational recommendations.</p>
+                <div class="evidence-body" id="question-list"></div>
+              </div>
+            </article>
+
+            <article class="evidence-panel" data-evidence-panel="schema">
+              <button class="evidence-trigger" type="button" aria-expanded="false">
+                <span class="evidence-panel-number">02</span>
+                <span class="evidence-panel-rail-title">Extracted Spark schema</span>
+              </button>
+              <div class="evidence-panel-content">
+                <p class="evidence-panel-kicker">Data contract</p>
+                <h3>Extracted Spark schema</h3>
+                <p class="evidence-panel-intro">The inferred structure keeps incident identity, category, time, district and location fields traceable.</p>
+                <div class="evidence-body"><pre id="schema-output"></pre></div>
+              </div>
+            </article>
+
+            <article class="evidence-panel" data-evidence-panel="limits">
+              <button class="evidence-trigger" type="button" aria-expanded="false">
+                <span class="evidence-panel-number">03</span>
+                <span class="evidence-panel-rail-title">Scope and limitations</span>
+              </button>
+              <div class="evidence-panel-content">
+                <p class="evidence-panel-kicker">Interpretation guardrails</p>
+                <h3>Scope and limitations</h3>
+                <p class="evidence-panel-intro">The showcase separates descriptive evidence from causal or predictive claims.</p>
+                <div class="evidence-body"><ul id="limit-list"></ul></div>
+              </div>
+            </article>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <span>Static showcase generated from a local notebook payload.</span>
-      <span id="footer-source"></span>
+    <footer class="site-footer">
+      <div class="shell footer-top">
+        <div>
+          <p class="eyebrow eyebrow-light">Project case study</p>
+          <h2>San Francisco<br />Crime Analysis</h2>
+        </div>
+        <a class="footer-link" href="#top">Back to top &uarr;</a>
+      </div>
+      <div class="shell footer-bottom">
+        <span>PySpark &middot; Spark SQL &middot; Pandas &middot; Data storytelling</span>
+        <span>Source: <a id="footer-notebook-link" href="https://github.com/RuijieThranduil/SF-crime/blob/main/SF_crime.ipynb" target="_blank" rel="noreferrer">SF_crime.ipynb &nearr;</a></span>
+        <span>Static showcase preview</span>
+      </div>
     </footer>
 
-    <script>
-window.PROJECT_DATA = {
-  "meta": {
-    "title": "San Francisco Crime Analysis",
-    "subtitle": "A Spark SQL case study turning large public safety records into recruiter-readable analytical evidence.",
-    "sourcePath": "C:\\Users\\94903\\Desktop\\L\\SF-Crime\\SF_crime.ipynb",
-    "notebook": "SF_crime.ipynb",
-    "projectFolder": "C:\\Users\\94903\\Desktop\\L\\SF-Crime",
-    "dateRange": "Historical incidents, 2003 to May 2018; trend focus on 2015-2018",
-    "generatedAt": "Generated from notebook outputs",
-    "tools": [
-      "Python",
-      "PySpark",
-      "Spark SQL",
-      "Pandas",
-      "Matplotlib",
-      "Notebook analysis"
-    ]
-  },
-  "story": {
-    "problem": "Explore San Francisco incident records at city scale and identify patterns that can support travel guidance and police resource allocation.",
-    "approach": "Load the raw CSV with Spark, register a SQL view, aggregate by category, district, month, and hour, then convert selected results to Pandas for visualization.",
-    "outcome": "The analysis surfaces concentrated district risk, dominant theft-related categories, seasonal trend comparisons, and hourly peaks useful for operational recommendations."
-  },
-  "workflow": [
-    {
-      "title": "Spark ingestion",
-      "detail": "Initialize a SparkSession and infer schema from the incident CSV without copying the source data into the web artifact."
-    },
-    {
-      "title": "SQL-first aggregation",
-      "detail": "Register the DataFrame as sf_crime and use Spark SQL to compute category, district, month, and hour summaries."
-    },
-    {
-      "title": "Visualization handoff",
-      "detail": "Convert compact aggregate outputs to chart-ready arrays for browser rendering."
-    },
-    {
-      "title": "Decision framing",
-      "detail": "Translate raw counts into recruiter-friendly findings about risk concentration, timing, and operational action."
-    }
-  ],
-  "findings": {
-    "categories": {
-      "title": "Top Crime Categories",
-      "summary": "Larceny/theft is the largest category in the extracted top-ten output, followed by other offenses and non-criminal records.",
-      "xKey": "category",
-      "yKey": "Count",
-      "data": [
-        {
-          "category": "LARCENY/THEFT",
-          "Count": 477975
-        },
-        {
-          "category": "OTHER OFFENSES",
-          "Count": 301874
-        },
-        {
-          "category": "NON-CRIMINAL",
-          "Count": 179139
-        },
-        {
-          "category": "ASSAULT",
-          "Count": 167042
-        },
-        {
-          "category": "VEHICLE THEFT",
-          "Count": 126228
-        },
-        {
-          "category": "DRUG/NARCOTIC",
-          "Count": 117821
-        },
-        {
-          "category": "VANDALISM",
-          "Count": 114718
-        },
-        {
-          "category": "WARRANTS",
-          "Count": 99821
-        },
-        {
-          "category": "BURGLARY",
-          "Count": 91067
-        },
-        {
-          "category": "SUSPICIOUS OCC",
-          "Count": 79087
-        }
-      ]
-    },
-    "districts": {
-      "title": "District Concentration",
-      "summary": "Southern, Mission, and Northern districts have the highest incident counts in the notebook output.",
-      "xKey": "PdDistrict",
-      "yKey": "Count",
-      "data": [
-        {
-          "PdDistrict": "SOUTHERN",
-          "Count": 378453
-        },
-        {
-          "PdDistrict": "MISSION",
-          "Count": 279744
-        },
-        {
-          "PdDistrict": "NORTHERN",
-          "Count": 260013
-        },
-        {
-          "PdDistrict": "CENTRAL",
-          "Count": 216646
-        },
-        {
-          "PdDistrict": "BAYVIEW",
-          "Count": 201989
-        },
-        {
-          "PdDistrict": "TENDERLOIN",
-          "Count": 180934
-        },
-        {
-          "PdDistrict": "INGLESIDE",
-          "Count": 176557
-        },
-        {
-          "PdDistrict": "TARAVAL",
-          "Count": 150970
-        },
-        {
-          "PdDistrict": "PARK",
-          "Count": 116296
-        },
-        {
-          "PdDistrict": "RICHMOND",
-          "Count": 110133
-        }
-      ]
-    },
-    "monthly": {
-      "title": "Monthly Trend, 2015-2018",
-      "summary": "The month-by-year table enables comparison across recent complete years before the dataset cutoff.",
-      "xKey": "Month",
-      "seriesKey": "Year",
-      "yKey": "Count",
-      "data": [
-        {
-          "Month": 1,
-          "Year": 2015,
-          "Count": 12781
-        },
-        {
-          "Month": 2,
-          "Year": 2015,
-          "Count": 11504
-        },
-        {
-          "Month": 3,
-          "Year": 2015,
-          "Count": 13037
-        },
-        {
-          "Month": 4,
-          "Year": 2015,
-          "Count": 12125
-        },
-        {
-          "Month": 5,
-          "Year": 2015,
-          "Count": 12893
-        },
-        {
-          "Month": 6,
-          "Year": 2015,
-          "Count": 12490
-        },
-        {
-          "Month": 7,
-          "Year": 2015,
-          "Count": 12598
-        },
-        {
-          "Month": 8,
-          "Year": 2015,
-          "Count": 12875
-        },
-        {
-          "Month": 9,
-          "Year": 2015,
-          "Count": 12042
-        },
-        {
-          "Month": 10,
-          "Year": 2015,
-          "Count": 12282
-        },
-        {
-          "Month": 11,
-          "Year": 2015,
-          "Count": 11299
-        },
-        {
-          "Month": 12,
-          "Year": 2015,
-          "Count": 10749
-        },
-        {
-          "Month": 1,
-          "Year": 2016,
-          "Count": 12154
-        },
-        {
-          "Month": 2,
-          "Year": 2016,
-          "Count": 11394
-        },
-        {
-          "Month": 3,
-          "Year": 2016,
-          "Count": 11547
-        },
-        {
-          "Month": 4,
-          "Year": 2016,
-          "Count": 11486
-        },
-        {
-          "Month": 5,
-          "Year": 2016,
-          "Count": 11916
-        },
-        {
-          "Month": 6,
-          "Year": 2016,
-          "Count": 11305
-        },
-        {
-          "Month": 7,
-          "Year": 2016,
-          "Count": 11436
-        },
-        {
-          "Month": 8,
-          "Year": 2016,
-          "Count": 11747
-        },
-        {
-          "Month": 9,
-          "Year": 2016,
-          "Count": 11696
-        },
-        {
-          "Month": 10,
-          "Year": 2016,
-          "Count": 12548
-        },
-        {
-          "Month": 11,
-          "Year": 2016,
-          "Count": 11891
-        },
-        {
-          "Month": 12,
-          "Year": 2016,
-          "Count": 12225
-        },
-        {
-          "Month": 1,
-          "Year": 2017,
-          "Count": 12314
-        },
-        {
-          "Month": 2,
-          "Year": 2017,
-          "Count": 11398
-        },
-        {
-          "Month": 3,
-          "Year": 2017,
-          "Count": 12827
-        },
-        {
-          "Month": 4,
-          "Year": 2017,
-          "Count": 12092
-        },
-        {
-          "Month": 5,
-          "Year": 2017,
-          "Count": 12378
-        },
-        {
-          "Month": 6,
-          "Year": 2017,
-          "Count": 11795
-        },
-        {
-          "Month": 7,
-          "Year": 2017,
-          "Count": 12363
-        },
-        {
-          "Month": 8,
-          "Year": 2017,
-          "Count": 12028
-        },
-        {
-          "Month": 9,
-          "Year": 2017,
-          "Count": 11819
-        },
-        {
-          "Month": 10,
-          "Year": 2017,
-          "Count": 12630
-        },
-        {
-          "Month": 11,
-          "Year": 2017,
-          "Count": 11609
-        },
-        {
-          "Month": 12,
-          "Year": 2017,
-          "Count": 11772
-        },
-        {
-          "Month": 1,
-          "Year": 2018,
-          "Count": 11320
-        },
-        {
-          "Month": 2,
-          "Year": 2018,
-          "Count": 9287
-        },
-        {
-          "Month": 3,
-          "Year": 2018,
-          "Count": 10042
-        },
-        {
-          "Month": 4,
-          "Year": 2018,
-          "Count": 9679
-        },
-        {
-          "Month": 5,
-          "Year": 2018,
-          "Count": 3405
-        }
-      ]
-    },
-    "hourly": {
-      "title": "Hourly Distribution",
-      "summary": "Incident volume rises through the day and peaks around early evening, supporting practical travel-safety discussion.",
-      "xKey": "Hour",
-      "yKey": "Count",
-      "data": [
-        {
-          "Hour": 0,
-          "Count": 106869
-        },
-        {
-          "Hour": 1,
-          "Count": 61748
-        },
-        {
-          "Hour": 2,
-          "Count": 51521
-        },
-        {
-          "Hour": 3,
-          "Count": 33314
-        },
-        {
-          "Hour": 4,
-          "Count": 23545
-        },
-        {
-          "Hour": 5,
-          "Count": 20976
-        },
-        {
-          "Hour": 6,
-          "Count": 31125
-        },
-        {
-          "Hour": 7,
-          "Count": 50654
-        },
-        {
-          "Hour": 8,
-          "Count": 76123
-        },
-        {
-          "Hour": 9,
-          "Count": 82997
-        },
-        {
-          "Hour": 10,
-          "Count": 88627
-        },
-        {
-          "Hour": 11,
-          "Count": 90390
-        },
-        {
-          "Hour": 12,
-          "Count": 124433
-        },
-        {
-          "Hour": 13,
-          "Count": 101000
-        },
-        {
-          "Hour": 14,
-          "Count": 104636
-        },
-        {
-          "Hour": 15,
-          "Count": 111500
-        },
-        {
-          "Hour": 16,
-          "Count": 117074
-        },
-        {
-          "Hour": 17,
-          "Count": 126960
-        },
-        {
-          "Hour": 18,
-          "Count": 132503
-        },
-        {
-          "Hour": 19,
-          "Count": 118831
-        },
-        {
-          "Hour": 20,
-          "Count": 107790
-        },
-        {
-          "Hour": 21,
-          "Count": 102603
-        },
-        {
-          "Hour": 22,
-          "Count": 107297
-        },
-        {
-          "Hour": 23,
-          "Count": 99220
-        }
-      ]
-    }
-  },
-  "skills": [
-    "Large-file ingestion with Spark",
-    "Spark SQL aggregation and grouping",
-    "Schema inspection and feature selection",
-    "Notebook-to-web data extraction",
-    "Data storytelling for non-technical review"
-  ],
-  "evidence": {
-    "questions": [
-      {
-        "id": "Q1",
-        "prompt": "Write a spark programme to count the crimes of different cates \u591a\u5c11\u62a2\u52ab\uff1f\u591a\u5c11\u5077\u8f66\uff1f\u7b49\u7b49"
-      },
-      {
-        "id": "Q2",
-        "prompt": "Count the number of crimes for differnet district and visualization"
-      },
-      {
-        "id": "Q3",
-        "prompt": "\uff1a Count the number of crimes each \"Sunday\" @ SF downtown hint1: downtown \u7ecf\u7eac\u5ea6\u5b9a\u4e49"
-      },
-      {
-        "id": "Q4",
-        "prompt": "Analysis number of crimes in each month of 2015,2016,2017,2018. Then give your insights of the output results. What is the business impact for your result"
-      },
-      {
-        "id": "Q5",
-        "prompt": "Analysis the number of crime with respsect to the hour in certian day like 2015/12/15, 2016/12/15, 2017/12/15. Then, give your travel suggestion to visit SF."
-      },
-      {
-        "id": "Q6",
-        "prompt": "question (1) Step1: Find out the top-3 danger disrict \u5b9a\u4e49\u4ec0\u4e48\u53ebdanger\uff1f (2) Step2: find out the crime event w.r.t category and time (hour) from the result of step 1 (3) give your advice to distribute the police based on your analysis results."
-      }
-    ],
-    "schema": [
-      "root",
-      " |-- PdId: long (nullable = true)",
-      " |-- IncidntNum: integer (nullable = true)",
-      " |-- Incident Code: integer (nullable = true)",
-      " |-- Category: string (nullable = true)",
-      " |-- Descript: string (nullable = true)",
-      " |-- DayOfWeek: string (nullable = true)",
-      " |-- Date: string (nullable = true)",
-      " |-- Time: timestamp (nullable = true)",
-      " |-- PdDistrict: string (nullable = true)",
-      " |-- Resolution: string (nullable = true)",
-      " |-- Address: string (nullable = true)",
-      " |-- X: double (nullable = true)",
-      " |-- Y: double (nullable = true)",
-      " |-- location: string (nullable = true)",
-      " |-- data_loaded_at: string (nullable = true)",
-      "",
-      "+--------------+----------+-------------+-------------+-----------------+---------+----------+-------------------+----------+----------+--------------------+----------------+--------------+--------------------+--------------------+",
-      "|          PdId|IncidntNum|Incident Code|     Category|         Descript|DayOfWeek|      Date|               Time|PdDistrict|Resolution|             Address|               X|             Y|            location|      data_loaded_at|",
-      "+--------------+----------+-------------+-------------+-----------------+---------+----------+-------------------+----------+----------+--------------------+----------------+--------------+--------------------+--------------------+",
-      "|16020415607021| 160204156|         7021|VEHICLE THEFT|STOLEN AUTOMOBILE| Thursday|03/03/2016|2026-01-04 19:30:00|   TARAVAL|      NONE|100 Block of BEPL...|-122.46354501682|37.70796836451|POINT (-122.46354...|2025/06/20 12:17:...|",
-      "|11049313327195| 110493133|        27195|     TRESPASS|      TRESPASSING|   Sunday|06/19/2011|2026-01-04 13:06:00|   TARAVAL|      NONE|100 Block of APTO...|-122.46675800516| 37.7291845796|POINT (-122.46675...|2025/06/20 12:17:...|"
-    ],
-    "rawTables": {
-      "category": [
-        {
-          "category": "LARCENY/THEFT",
-          "Count": 477975
-        },
-        {
-          "category": "OTHER OFFENSES",
-          "Count": 301874
-        },
-        {
-          "category": "NON-CRIMINAL",
-          "Count": 179139
-        },
-        {
-          "category": "ASSAULT",
-          "Count": 167042
-        },
-        {
-          "category": "VEHICLE THEFT",
-          "Count": 126228
-        },
-        {
-          "category": "DRUG/NARCOTIC",
-          "Count": 117821
-        },
-        {
-          "category": "VANDALISM",
-          "Count": 114718
-        },
-        {
-          "category": "WARRANTS",
-          "Count": 99821
-        },
-        {
-          "category": "BURGLARY",
-          "Count": 91067
-        },
-        {
-          "category": "SUSPICIOUS OCC",
-          "Count": 79087
-        }
-      ],
-      "district": [
-        {
-          "PdDistrict": "SOUTHERN",
-          "Count": 378453
-        },
-        {
-          "PdDistrict": "MISSION",
-          "Count": 279744
-        },
-        {
-          "PdDistrict": "NORTHERN",
-          "Count": 260013
-        },
-        {
-          "PdDistrict": "CENTRAL",
-          "Count": 216646
-        },
-        {
-          "PdDistrict": "BAYVIEW",
-          "Count": 201989
-        },
-        {
-          "PdDistrict": "TENDERLOIN",
-          "Count": 180934
-        },
-        {
-          "PdDistrict": "INGLESIDE",
-          "Count": 176557
-        },
-        {
-          "PdDistrict": "TARAVAL",
-          "Count": 150970
-        },
-        {
-          "PdDistrict": "PARK",
-          "Count": 116296
-        },
-        {
-          "PdDistrict": "RICHMOND",
-          "Count": 110133
-        },
-        {
-          "PdDistrict": "NA",
-          "Count": 1
-        }
-      ],
-      "monthly": [
-        {
-          "Month": 1,
-          "Year": 2015,
-          "Count": 12781
-        },
-        {
-          "Month": 2,
-          "Year": 2015,
-          "Count": 11504
-        },
-        {
-          "Month": 3,
-          "Year": 2015,
-          "Count": 13037
-        },
-        {
-          "Month": 4,
-          "Year": 2015,
-          "Count": 12125
-        },
-        {
-          "Month": 5,
-          "Year": 2015,
-          "Count": 12893
-        },
-        {
-          "Month": 6,
-          "Year": 2015,
-          "Count": 12490
-        },
-        {
-          "Month": 7,
-          "Year": 2015,
-          "Count": 12598
-        },
-        {
-          "Month": 8,
-          "Year": 2015,
-          "Count": 12875
-        },
-        {
-          "Month": 9,
-          "Year": 2015,
-          "Count": 12042
-        },
-        {
-          "Month": 10,
-          "Year": 2015,
-          "Count": 12282
-        },
-        {
-          "Month": 11,
-          "Year": 2015,
-          "Count": 11299
-        },
-        {
-          "Month": 12,
-          "Year": 2015,
-          "Count": 10749
-        },
-        {
-          "Month": 1,
-          "Year": 2016,
-          "Count": 12154
-        },
-        {
-          "Month": 2,
-          "Year": 2016,
-          "Count": 11394
-        },
-        {
-          "Month": 3,
-          "Year": 2016,
-          "Count": 11547
-        },
-        {
-          "Month": 4,
-          "Year": 2016,
-          "Count": 11486
-        },
-        {
-          "Month": 5,
-          "Year": 2016,
-          "Count": 11916
-        },
-        {
-          "Month": 6,
-          "Year": 2016,
-          "Count": 11305
-        },
-        {
-          "Month": 7,
-          "Year": 2016,
-          "Count": 11436
-        },
-        {
-          "Month": 8,
-          "Year": 2016,
-          "Count": 11747
-        },
-        {
-          "Month": 9,
-          "Year": 2016,
-          "Count": 11696
-        },
-        {
-          "Month": 10,
-          "Year": 2016,
-          "Count": 12548
-        },
-        {
-          "Month": 11,
-          "Year": 2016,
-          "Count": 11891
-        },
-        {
-          "Month": 12,
-          "Year": 2016,
-          "Count": 12225
-        },
-        {
-          "Month": 1,
-          "Year": 2017,
-          "Count": 12314
-        },
-        {
-          "Month": 2,
-          "Year": 2017,
-          "Count": 11398
-        },
-        {
-          "Month": 3,
-          "Year": 2017,
-          "Count": 12827
-        },
-        {
-          "Month": 4,
-          "Year": 2017,
-          "Count": 12092
-        },
-        {
-          "Month": 5,
-          "Year": 2017,
-          "Count": 12378
-        },
-        {
-          "Month": 6,
-          "Year": 2017,
-          "Count": 11795
-        },
-        {
-          "Month": 7,
-          "Year": 2017,
-          "Count": 12363
-        },
-        {
-          "Month": 8,
-          "Year": 2017,
-          "Count": 12028
-        },
-        {
-          "Month": 9,
-          "Year": 2017,
-          "Count": 11819
-        },
-        {
-          "Month": 10,
-          "Year": 2017,
-          "Count": 12630
-        },
-        {
-          "Month": 11,
-          "Year": 2017,
-          "Count": 11609
-        },
-        {
-          "Month": 12,
-          "Year": 2017,
-          "Count": 11772
-        },
-        {
-          "Month": 1,
-          "Year": 2018,
-          "Count": 11320
-        },
-        {
-          "Month": 2,
-          "Year": 2018,
-          "Count": 9287
-        },
-        {
-          "Month": 3,
-          "Year": 2018,
-          "Count": 10042
-        },
-        {
-          "Month": 4,
-          "Year": 2018,
-          "Count": 9679
-        },
-        {
-          "Month": 5,
-          "Year": 2018,
-          "Count": 3405
-        }
-      ],
-      "hourly": [
-        {
-          "Hour": 0,
-          "Count": 106869
-        },
-        {
-          "Hour": 1,
-          "Count": 61748
-        },
-        {
-          "Hour": 2,
-          "Count": 51521
-        },
-        {
-          "Hour": 3,
-          "Count": 33314
-        },
-        {
-          "Hour": 4,
-          "Count": 23545
-        },
-        {
-          "Hour": 5,
-          "Count": 20976
-        },
-        {
-          "Hour": 6,
-          "Count": 31125
-        },
-        {
-          "Hour": 7,
-          "Count": 50654
-        },
-        {
-          "Hour": 8,
-          "Count": 76123
-        },
-        {
-          "Hour": 9,
-          "Count": 82997
-        },
-        {
-          "Hour": 10,
-          "Count": 88627
-        },
-        {
-          "Hour": 11,
-          "Count": 90390
-        },
-        {
-          "Hour": 12,
-          "Count": 124433
-        },
-        {
-          "Hour": 13,
-          "Count": 101000
-        },
-        {
-          "Hour": 14,
-          "Count": 104636
-        },
-        {
-          "Hour": 15,
-          "Count": 111500
-        },
-        {
-          "Hour": 16,
-          "Count": 117074
-        },
-        {
-          "Hour": 17,
-          "Count": 126960
-        },
-        {
-          "Hour": 18,
-          "Count": 132503
-        },
-        {
-          "Hour": 19,
-          "Count": 118831
-        },
-        {
-          "Hour": 20,
-          "Count": 107790
-        },
-        {
-          "Hour": 21,
-          "Count": 102603
-        },
-        {
-          "Hour": 22,
-          "Count": 107297
-        },
-        {
-          "Hour": 23,
-          "Count": 99220
-        }
-      ]
-    }
-  },
-  "limits": [
-    "This page uses aggregate notebook outputs, not the full source CSV.",
-    "Counts are descriptive and should not be read as causal claims.",
-    "Notebook text includes a few encoding artifacts; the showcase cleans only visible labels needed for presentation."
-  ]
-};
-    </script>
-    <script>
-(function () {
-  const data = window.PROJECT_DATA;
-  if (!data) {
-    document.body.innerHTML = '<main class="section"><h1>Project data is missing.</h1><p>Run scripts/extract_sf_crime.py to generate data/project-data.js.</p></main>';
-    return;
-  }
-
-  const formatNumber = new Intl.NumberFormat("en-US");
-  const findingOrder = ["categories", "districts", "monthly", "hourly"];
-  let activeFinding = findingOrder[0];
-
-  function el(tag, className, text) {
-    const node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text !== undefined) node.textContent = text;
-    return node;
-  }
-
-  function setText(id, value) {
-    const node = document.getElementById(id);
-    if (node) node.textContent = value || "";
-  }
-
-  function renderHeader() {
-    setText("project-title", data.meta.title);
-    setText("project-subtitle", data.meta.subtitle);
-    setText("source-pill", data.meta.notebook);
-    setText("footer-source", data.meta.sourcePath);
-
-    const tools = document.getElementById("tool-list");
-    tools.innerHTML = "";
-    data.meta.tools.forEach((tool) => tools.appendChild(el("span", "chip", tool)));
-
-    const snapshot = document.getElementById("snapshot");
-    snapshot.innerHTML = "";
-    [
-      ["Notebook", data.meta.notebook],
-      ["Coverage", data.meta.dateRange],
-      ["Output", "Static HTML/CSS/JS"],
-      ["Source", data.meta.projectFolder],
-    ].forEach(([label, value]) => {
-      snapshot.appendChild(el("dt", "", label));
-      snapshot.appendChild(el("dd", "", value));
-    });
-  }
-
-  function renderStory() {
-    const cards = document.getElementById("story-cards");
-    cards.innerHTML = "";
-    [
-      ["Problem", data.story.problem],
-      ["Approach", data.story.approach],
-      ["Outcome", data.story.outcome],
-    ].forEach(([title, body]) => {
-      const card = el("article", "story-card");
-      card.appendChild(el("h3", "", title));
-      card.appendChild(el("p", "", body));
-      cards.appendChild(card);
-    });
-  }
-
-  function renderWorkflow() {
-    const workflow = document.getElementById("workflow");
-    workflow.innerHTML = "";
-    data.workflow.forEach((step, index) => {
-      const item = el("article", "timeline-item");
-      item.appendChild(el("span", "timeline-step", String(index + 1)));
-      item.appendChild(el("h3", "", step.title));
-      item.appendChild(el("p", "", step.detail));
-      workflow.appendChild(item);
-    });
-  }
-
-  function scale(value, max, size) {
-    if (!max) return 0;
-    return (value / max) * size;
-  }
-
-  function svgNode(name, attrs = {}) {
-    const node = document.createElementNS("http://www.w3.org/2000/svg", name);
-    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
-    return node;
-  }
-
-  function drawBars(finding) {
-    const rows = finding.data || [];
-    if (!rows.length) return el("p", "empty-state", "No extracted data available for this view.");
-
-    const width = Math.max(620, rows.length * 74);
-    const height = 340;
-    const pad = { top: 22, right: 24, bottom: 86, left: 74 };
-    const plotW = width - pad.left - pad.right;
-    const plotH = height - pad.top - pad.bottom;
-    const max = Math.max(...rows.map((row) => Number(row[finding.yKey]) || 0));
-    const gap = 12;
-    const barW = (plotW - gap * (rows.length - 1)) / rows.length;
-    const svg = svgNode("svg", { class: "chart-svg", viewBox: `0 0 ${width} ${height}`, role: "img" });
-
-    svg.appendChild(svgNode("line", { x1: pad.left, y1: pad.top, x2: pad.left, y2: pad.top + plotH, stroke: "#cbd5e1" }));
-    svg.appendChild(svgNode("line", { x1: pad.left, y1: pad.top + plotH, x2: pad.left + plotW, y2: pad.top + plotH, stroke: "#cbd5e1" }));
-
-    rows.forEach((row, index) => {
-      const value = Number(row[finding.yKey]) || 0;
-      const x = pad.left + index * (barW + gap);
-      const h = scale(value, max, plotH);
-      const y = pad.top + plotH - h;
-      const rect = svgNode("rect", { class: "bar", x, y, width: Math.max(10, barW), height: h, rx: 4 });
-      rect.appendChild(svgNode("title"));
-      rect.querySelector("title").textContent = `${row[finding.xKey]}: ${formatNumber.format(value)}`;
-      svg.appendChild(rect);
-
-      const label = svgNode("text", { class: "axis-label", x: x + barW / 2, y: pad.top + plotH + 18, "text-anchor": "middle", transform: `rotate(35 ${x + barW / 2} ${pad.top + plotH + 18})` });
-      label.textContent = row[finding.xKey];
-      svg.appendChild(label);
-    });
-
-    [0, 0.5, 1].forEach((tick) => {
-      const y = pad.top + plotH - tick * plotH;
-      const label = svgNode("text", { class: "axis-label", x: pad.left - 10, y: y + 4, "text-anchor": "end" });
-      label.textContent = formatNumber.format(Math.round(max * tick));
-      svg.appendChild(label);
-    });
-
-    return svg;
-  }
-
-  function drawLines(finding) {
-    const rows = finding.data || [];
-    if (!rows.length) return el("p", "empty-state", "No extracted data available for this view.");
-
-    const width = 720;
-    const height = 340;
-    const pad = { top: 26, right: 28, bottom: 46, left: 74 };
-    const plotW = width - pad.left - pad.right;
-    const plotH = height - pad.top - pad.bottom;
-    const years = [...new Set(rows.map((row) => String(row[finding.seriesKey])))].sort();
-    const max = Math.max(...rows.map((row) => Number(row[finding.yKey]) || 0));
-    const months = [...new Set(rows.map((row) => Number(row[finding.xKey])))].sort((a, b) => a - b);
-    const svg = svgNode("svg", { class: "chart-svg", viewBox: `0 0 ${width} ${height}`, role: "img" });
-
-    svg.appendChild(svgNode("line", { x1: pad.left, y1: pad.top, x2: pad.left, y2: pad.top + plotH, stroke: "#cbd5e1" }));
-    svg.appendChild(svgNode("line", { x1: pad.left, y1: pad.top + plotH, x2: pad.left + plotW, y2: pad.top + plotH, stroke: "#cbd5e1" }));
-
-    months.forEach((month) => {
-      const x = pad.left + ((month - 1) / 11) * plotW;
-      const label = svgNode("text", { class: "axis-label", x, y: pad.top + plotH + 24, "text-anchor": "middle" });
-      label.textContent = String(month).padStart(2, "0");
-      svg.appendChild(label);
-    });
-
-    years.forEach((year) => {
-      const points = rows
-        .filter((row) => String(row[finding.seriesKey]) === year)
-        .map((row) => {
-          const month = Number(row[finding.xKey]);
-          const value = Number(row[finding.yKey]) || 0;
-          const x = pad.left + ((month - 1) / 11) * plotW;
-          const y = pad.top + plotH - scale(value, max, plotH);
-          return [x, y, value];
-        });
-
-      const path = svgNode("path", {
-        class: `line-${year}`,
-        d: points.map(([x, y], index) => `${index ? "L" : "M"} ${x} ${y}`).join(" "),
-        fill: "none",
-        stroke: "#0f766e",
-        "stroke-width": 3,
-      });
-      svg.appendChild(path);
-
-      points.forEach(([x, y, value]) => {
-        const dot = svgNode("circle", { cx: x, cy: y, r: 4, fill: "currentColor" });
-        dot.appendChild(svgNode("title"));
-        dot.querySelector("title").textContent = `${year}: ${formatNumber.format(value)}`;
-        svg.appendChild(dot);
-      });
-    });
-
-    const legend = svgNode("g", { transform: `translate(${pad.left}, 12)` });
-    years.forEach((year, index) => {
-      const x = index * 86;
-      legend.appendChild(svgNode("line", { class: `line-${year}`, x1: x, y1: 0, x2: x + 24, y2: 0, "stroke-width": 3 }));
-      const label = svgNode("text", { class: "axis-label", x: x + 31, y: 4 });
-      label.textContent = year;
-      legend.appendChild(label);
-    });
-    svg.appendChild(legend);
-
-    return svg;
-  }
-
-  function renderTable(rows, columns) {
-    const table = el("table", "data-table");
-    const thead = el("thead");
-    const headRow = el("tr");
-    columns.forEach((column) => headRow.appendChild(el("th", "", column)));
-    thead.appendChild(headRow);
-    table.appendChild(thead);
-
-    const tbody = el("tbody");
-    rows.slice(0, 12).forEach((row) => {
-      const tr = el("tr");
-      columns.forEach((column) => {
-        const value = row[column];
-        tr.appendChild(el("td", "", typeof value === "number" ? formatNumber.format(value) : value));
-      });
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-    return table;
-  }
-
-  function renderFinding() {
-    const finding = data.findings[activeFinding];
-    const panel = document.getElementById("finding-panel");
-    panel.innerHTML = "";
-
-    const header = el("div", "finding-header");
-    const text = el("div");
-    text.appendChild(el("h3", "", finding.title));
-    text.appendChild(el("p", "", finding.summary));
-    header.appendChild(text);
-    header.appendChild(el("p", "chart-note", `${(finding.data || []).length} extracted rows`));
-    panel.appendChild(header);
-
-    const chartWrap = el("div", "chart-wrap");
-    chartWrap.appendChild(activeFinding === "monthly" ? drawLines(finding) : drawBars(finding));
-    panel.appendChild(chartWrap);
-
-    const columns = Object.keys((finding.data || [])[0] || {});
-    if (columns.length) panel.appendChild(renderTable(finding.data, columns));
-  }
-
-  function renderTabs() {
-    const tabs = document.getElementById("finding-tabs");
-    tabs.innerHTML = "";
-    findingOrder.forEach((key) => {
-      const finding = data.findings[key];
-      const tab = el("button", "tab", finding.title);
-      tab.type = "button";
-      tab.setAttribute("role", "tab");
-      tab.setAttribute("aria-selected", String(key === activeFinding));
-      tab.addEventListener("click", () => {
-        activeFinding = key;
-        renderTabs();
-        renderFinding();
-      });
-      tabs.appendChild(tab);
-    });
-  }
-
-  function renderSkillsAndEvidence() {
-    const skills = document.getElementById("skills-list");
-    skills.innerHTML = "";
-    data.skills.forEach((skill) => skills.appendChild(el("li", "", skill)));
-
-    const questions = document.getElementById("questions");
-    questions.innerHTML = "";
-    data.evidence.questions.forEach((question) => {
-      const card = el("article", "question-card");
-      card.appendChild(el("strong", "", question.id));
-      card.appendChild(el("p", "", question.prompt || "Notebook analysis question"));
-      questions.appendChild(card);
-    });
-
-    document.getElementById("schema").textContent = (data.evidence.schema || []).join("\n");
-    const limits = document.getElementById("limits");
-    limits.innerHTML = "";
-    data.limits.forEach((limit) => limits.appendChild(el("li", "", limit)));
-  }
-
-  renderHeader();
-  renderStory();
-  renderWorkflow();
-  renderTabs();
-  renderFinding();
-  renderSkillsAndEvidence();
-})();
-    </script>
+    <script src="data/project-data.js"></script>
+    <script src="cinematic.js"></script>
   </body>
 </html>
